@@ -38,10 +38,9 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_3(string text) {
-            var str = new List<int>()text.Split(' ');
-            var word = str.Count;
-            Console.WriteLine(str);
-
+            var str = text.Split(' ').ToArray();
+            int StrCount = str.Length;
+            Console.WriteLine(StrCount);
 
         }
 
