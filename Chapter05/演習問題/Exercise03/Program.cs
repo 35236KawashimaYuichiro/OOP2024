@@ -25,9 +25,7 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_1(string text) {
-
-            text = "Jackdaws Love my big sphinx of quartz";
-            int SpaceCount = text.Count(char.IsWhiteSpace);
+            int SpaceCount = text.Count(c => c == ' ');
             Console.WriteLine("空白の数: " + SpaceCount);
         }
 
@@ -38,9 +36,8 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_3(string text) {
-            var str = text.Split(' ').ToArray();
-            int StrCount = str.Length;
-            Console.WriteLine(StrCount);
+            var str = text.Split(' ').Length;
+            Console.WriteLine(str);
 
         }
 
@@ -52,6 +49,12 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_5(string text) {
+            var str = text.Split(' ').ToArray();
+            StringBuilder ss = new StringBuilder();
+            foreach (string word in str) {
+                ss.Append(word).Append(' ');
+            }
+            Console.WriteLine(ss);
         }
     }
 }
