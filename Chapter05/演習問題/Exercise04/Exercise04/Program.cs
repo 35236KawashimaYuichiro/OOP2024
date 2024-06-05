@@ -7,24 +7,34 @@ using System.Threading.Tasks;
 namespace Exercise04 {
     internal class Program {
         static void Main(string[] args) {
-            var line = "Novelist=谷崎潤一郎;BestWork=春琴抄;Born=1886";
+            {
+                var line = "Novelist=谷崎潤一郎：BestWork=春琴抄：Born=1886";
 
-            string[] parts = line.Split(';');
+                // 文字列を':'で分割
+                string[] str = line.Split('：');
 
-            string novelist = parts[0].Split('=')[1];
-            string bestWork = parts[1].Split('=')[1];
-            string birthYear = parts[2].Split('=')[1];
+                foreach (var word in str) {
+                    // '='で分割
+                    string[] keyValue = word.Split('=');
+                    string key = keyValue[0];
+                    string value = keyValue[1];
+                    string Japanese = ToJapanese(key);
 
-            Console.WriteLine("作家：" + novelist);
-            Console.WriteLine("代表作：" + bestWork);
-            Console.WriteLine("誕生年：" + birthYear);
-
+                    Console.WriteLine($"{Japanese}：{value}");
+                }
+            }
         }
 
-        //できたら以下のメソッドを完成させて利用する
-        //static string ToJapanese(string key) {
-
-
-        //}
+        static string ToJapanese(string key) {
+            switch (key) {
+                case "Novelist":
+                    return "作家";
+                case "BestWork":
+                    return "代表作";
+                case "Born":
+                    return "誕生年";
+            }
+            throw new ArgumentException("引数に誤りがあります");
+        }
     }
 }
