@@ -8,19 +8,15 @@ namespace Exercise04 {
     internal class Program {
         static void Main(string[] args) {
             {
-                var line = "Novelist=谷崎潤一郎：BestWork=春琴抄：Born=1886";
+                var line = "Novelist=谷崎潤一郎;BestWork=春琴抄;Born=1886";
 
-                // 文字列を':'で分割
-                string[] str = line.Split('：');
+                // 文字列を';'で分割
+                string[] str = line.Split(';');
 
-                foreach (var word in str) {
+                foreach (var word in line.Split(';')) {
                     // '='で分割
-                    string[] keyValue = word.Split('=');
-                    string key = keyValue[0];
-                    string value = keyValue[1];
-                    string Japanese = ToJapanese(key);
-
-                    Console.WriteLine($"{Japanese}：{value}");
+                    var array = word.Split('=');
+                    Console.WriteLine("{0}：{1}", ToJapanese(array[0]), array[1]);
                 }
             }
         }
