@@ -10,9 +10,6 @@ namespace Exercise04 {
             {
                 var line = "Novelist=谷崎潤一郎;BestWork=春琴抄;Born=1886";
 
-                // 文字列を';'で分割
-                string[] str = line.Split(';');
-
                 foreach (var word in line.Split(';')) {
                     // '='で分割
                     var array = word.Split('=');
