@@ -8,8 +8,8 @@ namespace Test01 {
     class Program {
         static void Main(string[] args) {
             var score = new ScoreCounter("StudentScore.csv");
-            var TotalBySubject = score.GetPerStudentScore();
-            foreach (var obj in TotalBySubject) {
+            IDictionary<string, int> TotalBySubject = score.GetPerStudentScore();
+            foreach (KeyValuePair<string, int> obj in TotalBySubject) {
                 Console.WriteLine("{0} {1}", obj.Key, obj.Value);
             }
         }
