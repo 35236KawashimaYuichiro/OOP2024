@@ -9,29 +9,30 @@ namespace Section04 {
         static void Main(string[] args) {
             // コンストラクタ呼び出し
             var abbrs = new Abbreviations();
-            
+
             // Addメソッドの呼び出し例
             abbrs.Add("IOC", "国際オリンピック委員会");
             abbrs.Add("NPT", "核兵器不拡散条約");
 
             //7.2.3(Countの呼び出し)
-            Console.WriteLine("略語辞書の用語の数: {0}", abbrs.Count);
+            Console.WriteLine("略語辞書の用語の数：" + abbrs.Count);
 
 
             //7.2.3(Removeの呼び出し)
-            abbrs.Remove("APEC");
-            Console.WriteLine("削除後の略語辞書の用語の数: {0}", abbrs.Count);
+            if (abbrs.Remove("NPT"))
+                Console.WriteLine("削除後の略語辞書の用語の数：" + abbrs.Count);
+            else
+                Console.WriteLine("削除出来ません");
 
             //7.2.4
-            var threeAbbrs = abbrs.GetThree();
-            Console.WriteLine("3文字の省略後：");
-            foreach (var abbr in threeAbbrs) {
+            Console.WriteLine("3文字の省略語：");
+            foreach (var abbr in  abbrs.Where(x => x.Key.Length == 3)) {
                 Console.WriteLine(abbr);
             }
+
+
+
             Console.WriteLine();
-
-
-
 
             // インデクサの利用例
             var names = new[] { "WHO", "FIFA", "NPT", };

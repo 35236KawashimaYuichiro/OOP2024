@@ -26,9 +26,9 @@ namespace Section04 {
         }
 
         //7.2.4
-        public IEnumerable<string> GetThree() {
-            return _dict.Keys.Where(key => key.Length == 3);
-        }
+        //public IEnumerable<string> GetThree() {
+        //    return _dict.Keys.Where(key => key.Length == 3);
+        //}
 
 
 
