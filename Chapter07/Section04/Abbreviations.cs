@@ -12,7 +12,12 @@ namespace Section04 {
         private Dictionary<string, string> _dict = new Dictionary<string, string>();
 
         //7.2.1(Countプロパティの作成)
-        public int Count => _dict.Count;
+        public int Count {
+            get {
+                return _dict.Count;
+            }
+        }
+
 
         //7.2.2(Removeメソッドの作成)
         public bool Remove(string abbr) {
