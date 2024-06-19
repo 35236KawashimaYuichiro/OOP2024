@@ -22,6 +22,17 @@ namespace Section04 {
             abbrs.Remove("APEC");
             Console.WriteLine("削除後の略語辞書の用語の数: {0}", abbrs.Count);
 
+            //7.2.4
+            var threeAbbrs = abbrs.GetThree();
+            Console.WriteLine("3文字の省略後：");
+            foreach (var abbr in threeAbbrs) {
+                Console.WriteLine(abbr);
+            }
+            Console.WriteLine();
+
+
+
+
             // インデクサの利用例
             var names = new[] { "WHO", "FIFA", "NPT", };
             foreach (var name in names) {
