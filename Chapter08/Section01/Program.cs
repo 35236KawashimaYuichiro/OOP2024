@@ -13,10 +13,8 @@ namespace Section01 {
             Console.WriteLine("生年月日を入力");
             Console.Write("年:");
             var year = int.Parse(Console.ReadLine());
-
             Console.Write("月:");
             var month = int.Parse(Console.ReadLine());
-
             Console.Write("日:");
             var day = int.Parse(Console.ReadLine());
 
@@ -28,7 +26,9 @@ namespace Section01 {
 
             Console.WriteLine($"あなたは{str}{bt.ToString("dddd")}に生まれました");
 
-
+            TimeSpan diff = DateTime.Now - bt;
+            Console.WriteLine("現在との差は、{0}日間{1}時間{2}分{3}秒です",
+                              diff.Days,diff.Hours,diff.Minutes,diff.Seconds);
             
 
 
