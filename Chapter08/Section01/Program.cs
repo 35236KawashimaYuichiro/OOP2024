@@ -18,23 +18,22 @@ namespace Section01 {
             Console.Write("日:");
             var day = int.Parse(Console.ReadLine());
 
-            DateTime bt = new DateTime(year, month, day);
+            DateTime bd = new DateTime(year, month, day);
 
             var culture = new CultureInfo("ja-JP");
             culture.DateTimeFormat.Calendar = new JapaneseCalendar();
-            var str = bt.ToString("ggyy年M月d日", culture);
+            var str = bd.ToString("ggyy年M月d日dddd", culture);
 
-            Console.WriteLine($"あなたは{str}{bt.ToString("dddd")}に生まれました");
+            Console.WriteLine($"あなたは{str}に生まれました");
 
-            TimeSpan diff = DateTime.Now - bt;
-            Console.WriteLine("現在との差は、{0}日間{1}時間{2}分{3}秒です",
-                              diff.Days,diff.Hours,diff.Minutes,diff.Seconds);
-            
+            TimeSpan diff = DateTime.Today - bd;
+            Console.WriteLine("あなたは生まれてから、{0}日目です", diff.Days + 1);
 
 
 
 
-      
+
+
         }
 
     }
