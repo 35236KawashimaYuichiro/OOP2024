@@ -18,7 +18,18 @@ namespace Exercise01 {
         }
 
         private void btEx8_2_Click(object sender, EventArgs e) {
+            var today = DateTime.Today;
+            DateTime nextWeekDay = NextDay(today,DayOfWeek.Tuesday);
 
+            tbDisp2.Text = nextWeekDay.ToString("d");
         }
+
+        public static DateTime NextDay(DateTime date,DayOfWeek dayOfWeek) {
+            var days = (int)dayOfWeek - (int)(date.DayOfWeek);
+            if (days <= 0) 
+                days += 7;
+                return date.AddDays(days);
+        }
+
     }
 }
