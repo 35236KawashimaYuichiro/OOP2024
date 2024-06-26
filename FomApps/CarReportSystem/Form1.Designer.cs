@@ -37,7 +37,7 @@
             rbHonda = new RadioButton();
             rbNissan = new RadioButton();
             rbToyota = new RadioButton();
-            tbCarName = new ComboBox();
+            cbCarName = new ComboBox();
             tbReport = new TextBox();
             label6 = new Label();
             btPicOpen = new Button();
@@ -205,14 +205,14 @@
             rbToyota.Text = "トヨタ";
             rbToyota.UseVisualStyleBackColor = true;
             // 
-            // tbCarName
+            // cbCarName
             // 
-            tbCarName.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            tbCarName.FormattingEnabled = true;
-            tbCarName.Location = new Point(95, 181);
-            tbCarName.Name = "tbCarName";
-            tbCarName.Size = new Size(253, 33);
-            tbCarName.TabIndex = 3;
+            cbCarName.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
+            cbCarName.FormattingEnabled = true;
+            cbCarName.Location = new Point(95, 181);
+            cbCarName.Name = "cbCarName";
+            cbCarName.Size = new Size(253, 33);
+            cbCarName.TabIndex = 3;
             // 
             // tbReport
             // 
@@ -353,7 +353,7 @@
             Controls.Add(btPicOpen);
             Controls.Add(tbReport);
             Controls.Add(groupBox1);
-            Controls.Add(tbCarName);
+            Controls.Add(cbCarName);
             Controls.Add(cbAuther);
             Controls.Add(label5);
             Controls.Add(label7);
@@ -390,7 +390,7 @@
         private RadioButton rbHonda;
         private RadioButton rbNissan;
         private RadioButton rbToyota;
-        private ComboBox tbCarName;
+        private ComboBox cbCarName;
         private TextBox tbReport;
         private Label label6;
         private Button btPicOpen;
