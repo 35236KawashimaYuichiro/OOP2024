@@ -48,13 +48,13 @@
             btModifyReport = new Button();
             btDeleteReport = new Button();
             label7 = new Label();
-            dgCarReport = new DataGridView();
+            dgvCarReport = new DataGridView();
             btReportOpen = new Button();
             btReportSave = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgCarReport).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvCarReport).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -268,6 +268,7 @@
             btAddReport.TabIndex = 6;
             btAddReport.Text = "追加";
             btAddReport.UseVisualStyleBackColor = true;
+            btAddReport.Click += btAddReport_Click;
             // 
             // pbPicture
             // 
@@ -308,13 +309,13 @@
             label7.TabIndex = 2;
             label7.Text = "一覧";
             // 
-            // dgCarReport
+            // dgvCarReport
             // 
-            dgCarReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgCarReport.Location = new Point(99, 389);
-            dgCarReport.Name = "dgCarReport";
-            dgCarReport.Size = new Size(717, 144);
-            dgCarReport.TabIndex = 8;
+            dgvCarReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvCarReport.Location = new Point(99, 389);
+            dgvCarReport.Name = "dgvCarReport";
+            dgvCarReport.Size = new Size(717, 144);
+            dgvCarReport.TabIndex = 8;
             // 
             // btReportOpen
             // 
@@ -341,7 +342,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(853, 560);
-            Controls.Add(dgCarReport);
+            Controls.Add(dgvCarReport);
             Controls.Add(pbPicture);
             Controls.Add(pictureBox1);
             Controls.Add(btDeleteReport);
@@ -369,7 +370,7 @@
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPicture).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgCarReport).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvCarReport).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -401,7 +402,7 @@
         private Button btModifyReport;
         private Button btDeleteReport;
         private Label label7;
-        private DataGridView dgCarReport;
+        private DataGridView dgvCarReport;
         private Button btReportOpen;
         private Button btReportSave;
     }
