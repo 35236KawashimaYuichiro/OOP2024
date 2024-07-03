@@ -14,6 +14,11 @@ namespace CarReportSystem {
         }
 
         private void btAddReport_Click(object sender, EventArgs e) {
+            if (cbAuthor.Text == "" || cbCarName.Text == "") {
+                MessageBox.Show("記録者と車名は必須です");
+                return;
+            }
+
             CarReport carReport = new CarReport {
                 Date = dtpdate.Value,
                 Author = cbAuthor.Text,
@@ -25,7 +30,25 @@ namespace CarReportSystem {
 
             };
             listCarReports.Add(carReport);
+            setCbAuthor(cbAuthor.Text);
+            setCbCarName(cbCarName.Text);
+
+            dgvCarReport.ClearSelection();
         }
+        //記録者の履歴をコンボボックスへ登録(重複なし)
+        private void setCbAuthor(string author) {
+            if (!cbAuthor.Items.Contains(author)) {
+                cbAuthor.Items.Add(author);
+            }
+        }
+
+        //車名の履歴をコンボボックスへ登録(重複なし)
+        private void setCbCarName(string name) {
+            if (!cbCarName.Items.Contains(name)) {
+                cbCarName.Items.Add(name);
+            }
+        }
+
 
         //選択されているメーカー名を列挙型で返す
         private CarReport.MakerGroup GetRadioButtonMaker() {
@@ -42,8 +65,6 @@ namespace CarReportSystem {
             } else {
                 return CarReport.MakerGroup.その他;
             }
-
-
         }
 
         private void setRadioButtonMaker(CarReport.MakerGroup targetMaker) {
@@ -64,10 +85,9 @@ namespace CarReportSystem {
                     rbInport.Checked = true;
                     break;
                 case CarReport.MakerGroup.その他:
-                    rbInport.Checked = true;
+                    rb.Checked = true;
                     break;
             }
-
         }
 
 
@@ -95,12 +115,19 @@ namespace CarReportSystem {
         }
 
         private void btDeleteReport_Click(object sender, EventArgs e) {
+            if (dgvCarReport.CurrentRow == null) {
+                MessageBox.Show("データがありません");
+                return;
+            }
             listCarReports.RemoveAt(dgvCarReport.CurrentRow.Index);
             dgvCarReport.Refresh();
         }
 
         private void btModifyReport_Click(object sender, EventArgs e) {
-
+            if (dgvCarReport.CurrentRow == null) {
+                MessageBox.Show("データがありません");
+                return;
+            }
             var rowIndex = dgvCarReport.CurrentRow.Index;
 
             CarReport carReport = new CarReport {
@@ -115,5 +142,7 @@ namespace CarReportSystem {
             dgvCarReport.Refresh();
 
         }
+
+
     }
 }

@@ -354,7 +354,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(853, 560);
+            ClientSize = new Size(893, 592);
             Controls.Add(dgvCarReport);
             Controls.Add(pbPicture);
             Controls.Add(pictureBox1);
