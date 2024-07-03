@@ -100,18 +100,18 @@ namespace CarReportSystem {
         }
 
         private void btModifyReport_Click(object sender, EventArgs e) {
-            CarReport selectedReport = (CarReport)dgvCarReport.CurrentRow.DataBoundItem;
 
-            dtpdate.Value = selectedReport.Date;
-            cbAuthor.Text = selectedReport.Author;
-            setRadioButtonMaker(selectedReport.Maker);
-            cbCarName.Text = selectedReport.CarName;
-            tbReport.Text = selectedReport.Report;
-            pbPicture.Image = selectedReport.Picture;
+            var rowIndex = dgvCarReport.CurrentRow.Index;
 
-
-
-
+            CarReport carReport = new CarReport {
+                Date = dtpdate.Value,
+                Author = cbAuthor.Text,
+                Maker = GetRadioButtonMaker(),
+                CarName = cbCarName.Text,
+                Report = tbReport.Text,
+                Picture = pbPicture.Image,
+            };
+            listCarReports[rowIndex] = carReport;
             dgvCarReport.Refresh();
 
         }
