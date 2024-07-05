@@ -387,6 +387,7 @@
             Controls.Add(dtpdate);
             Controls.Add(label6);
             Controls.Add(label1);
+            MaximizeBox = false;
             Name = "Form1";
             Text = "試乗レポート管理システム";
             Load += Form1_Load;
