@@ -251,8 +251,10 @@ namespace CarReportSystem {
 
         private void 終了ToolStripMenuItem_Click(object sender, EventArgs e) {
             // 終了確認のメッセージボックスを表示
-            DialogResult result = MessageBox.Show("アプリケーションを終了しますか？", "終了確認", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-            if (result == DialogResult.Yes) { Application.Exit(); }
+            if (MessageBox.Show("アプリケーションを終了しますか？", "終了確認", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes) { 
+                Application.Exit(); 
+            }
         }
     }
+
 }
