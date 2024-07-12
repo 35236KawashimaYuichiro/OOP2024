@@ -10,7 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace CarReportSystem {
     public partial class Form1 : Form {
 
-        Settings settings = new Settings(); // 設定ファイルのインスタンス
+        Settings settings = Settings.getInstance(); // 設定ファイルのインスタンス
 
         //カーレポート管理用リスト
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
@@ -143,7 +143,7 @@ namespace CarReportSystem {
                 if (File.Exists("settings.xml")) {
                     using (var reader = XmlReader.Create("settings.xml")) {
                         var serializer = new XmlSerializer(typeof(Settings));
-                        settings = (Settings)serializer.Deserialize(reader);
+                        settings = serializer.Deserialize(reader) as Settings;
                         // 設定を反映
                         this.BackColor = Color.FromArgb(settings.MainFormColor);
                     }
