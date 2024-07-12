@@ -1,11 +1,16 @@
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.Metrics;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml;
+using System.Xml.Serialization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
+
+        Settings settings = new Settings(); // 設定ファイルのインスタンス
 
         //カーレポート管理用リスト
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
@@ -14,6 +19,7 @@ namespace CarReportSystem {
         public Form1() {
             InitializeComponent();
             dgvCarReport.DataSource = listCarReports;
+
         }
 
         private void btAddReport_Click(object sender, EventArgs e) {
@@ -131,6 +137,22 @@ namespace CarReportSystem {
             //交互に色を設定
             dgvCarReport.RowsDefaultCellStyle.BackColor = Color.AliceBlue;
             dgvCarReport.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+
+            //逆シリアル化
+            try {
+                if (File.Exists("settings.xml")) {
+                    using (var reader = XmlReader.Create("settings.xml")) {
+                        var serializer = new XmlSerializer(typeof(Settings));
+                        settings = (Settings)serializer.Deserialize(reader);
+                        // 設定を反映
+                        this.BackColor = Color.FromArgb(settings.MainFormColor);
+                    }
+                }
+            }
+            catch (Exception) {
+                MessageBox.Show("設定ファイルの読み込みエラー");
+            }
+
 
         }
 
@@ -251,10 +273,32 @@ namespace CarReportSystem {
 
         private void 終了ToolStripMenuItem_Click(object sender, EventArgs e) {
             // 終了確認のメッセージボックスを表示
-            if (MessageBox.Show("アプリケーションを終了しますか？", "終了確認", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes) { 
-                Application.Exit(); 
+            if (MessageBox.Show("アプリケーションを終了しますか？", "終了確認", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes) {
+                Application.Exit();
+            }
+        }
+
+        private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (cdColor.ShowDialog() == DialogResult.OK) {
+                this.BackColor = cdColor.Color;
+                settings.MainFormColor = cdColor.Color.ToArgb();
+            }
+
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+            //設定ファイルのシリアル化
+            try {
+                using (var writer = XmlWriter.Create("settings.xml")) {
+                    var serializer = new XmlSerializer(settings.GetType());
+                    serializer.Serialize(writer, settings);
+                }
+            }
+            catch (Exception) {
+                MessageBox.Show("設定ファイルの読み込みエラー");
             }
         }
     }
+
 
 }
