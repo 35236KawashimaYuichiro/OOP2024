@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyVersion>2.2.2.2</AssemblyVersion>
+    <Company>開発ひかる（有）</Company>
   </PropertyGroup>
 
 </Project>

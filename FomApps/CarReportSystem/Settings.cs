@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CarReportSystem {
     public class Settings {
 
-        private static Settings instance; //自分自身のインスタンス
+        private static Settings? instance; //自分自身のインスタンス
 
         public int MainFormColor { get; set; }
 
