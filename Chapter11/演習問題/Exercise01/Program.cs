@@ -78,6 +78,30 @@ namespace Exercise01 {
 
             Console.WriteLine($"サッカーの情報を追加しました。");
             Exercise1_1(newfile);
+
+
+
+            Console.Write("スポーツ名: ");
+            string sportName = Console.ReadLine();
+
+            Console.Write("漢字表記: ");
+            string kanji = Console.ReadLine();
+
+            Console.Write("チームメンバー数: ");
+            int teamMembers = int.Parse(Console.ReadLine());
+
+            Console.Write("最初にプレイされた年: ");
+            int firstPlayed = int.Parse(Console.ReadLine());
+            var element = new XElement("ballsport",
+                new XElement("name", sportName, new XAttribute("kanji", kanji)),
+                new XElement("teammembers", teamMembers),
+                new XElement("firstplayed", firstPlayed));
+
+            xdoc.Root.Add(element);
+            xdoc.Save(newfile);
+
+            Exercise1_1(newfile);
         }
+
     }
 }
