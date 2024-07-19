@@ -65,7 +65,19 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_4(string file, string newfile) {
+            var xdoc = XDocument.Load(file);
 
+            var soccerData = new XElement("ballsport",
+                new XElement("name", "サッカー"),
+                new XElement("teammembers", 11),
+                new XElement("firstplayed", 1863)
+            );
+
+            xdoc.Root.Add(soccerData);
+            xdoc.Save(newfile);
+
+            Console.WriteLine($"サッカーの情報を {newfile} に追加しました。");
+            Exercise1_1(newfile);
         }
     }
 }
