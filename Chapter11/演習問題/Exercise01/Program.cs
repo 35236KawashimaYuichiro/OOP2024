@@ -47,7 +47,7 @@ namespace Exercise01 {
                                  .OrderBy(x => x.FirstPlayed);
 
             foreach (var bs in kanzi) {
-                Console.WriteLine($"{bs.NameKanji}:{bs.FirstPlayed}");
+                Console.WriteLine($"{bs.NameKanji}:{bs.FirstPlayed}年");
             }
         }
 
@@ -68,7 +68,7 @@ namespace Exercise01 {
             var xdoc = XDocument.Load(file);
 
             var soccerData = new XElement("ballsport",
-                new XElement("name", "サッカー"),
+                new XElement("name", "サッカー", new XAttribute("kanji", "蹴球")),
                 new XElement("teammembers", 11),
                 new XElement("firstplayed", 1863)
             );
@@ -76,7 +76,7 @@ namespace Exercise01 {
             xdoc.Root.Add(soccerData);
             xdoc.Save(newfile);
 
-            Console.WriteLine($"サッカーの情報を {newfile} に追加しました。");
+            Console.WriteLine($"サッカーの情報を追加しました。");
             Exercise1_1(newfile);
         }
     }
