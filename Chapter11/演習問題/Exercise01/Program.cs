@@ -92,6 +92,7 @@ namespace Exercise01 {
 
             Console.Write("最初にプレイされた年: ");
             int firstPlayed = int.Parse(Console.ReadLine());
+
             var element = new XElement("ballsport",
                 new XElement("name", sportName, new XAttribute("kanji", kanji)),
                 new XElement("teammembers", teamMembers),
