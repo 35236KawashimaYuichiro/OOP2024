@@ -57,17 +57,17 @@
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(143, 392);
+            this.webBrowser1.Location = new System.Drawing.Point(12, 404);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(250, 250);
+            this.webBrowser1.Size = new System.Drawing.Size(988, 250);
             this.webBrowser1.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(996, 591);
+            this.ClientSize = new System.Drawing.Size(1005, 676);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.lbRssTitle);
             this.Controls.Add(this.btGet);
