@@ -12,16 +12,43 @@ namespace SampleEntityFramework {
             //AddAuthors();
             //AddBooks();
             //UpdateBook();
-            DisplayBooks();
             //AddAuthors2();
             //AddBooks2();
+            DisplayBooks();
+            //DeleteAllBooksAndAuthors();
 
+        }
+        private static void DeleteAllBooksAndAuthors() {
+            using (var db = new BooksDbContext()) {
+                // すべての書籍を削除
+                var books = db.Books.ToList();
+                if (books.Any()) {
+                    db.Books.RemoveRange(books);
+                }
 
+                // すべての著者を削除
+                var authors = db.Authors.ToList();
+                if (authors.Any()) {
+                    db.Authors.RemoveRange(authors);
+                }
+
+                // データベースを更新
+                db.SaveChanges();
+            }
+        }
+        private static void DeleteBooks() {
+            using (var db = new BooksDbContext()) {
+                var book = db.Books.SingleOrDefault(x => x.Id == 10);
+                if (book != null) {
+                    db.Books.Remove(book);
+                    db.SaveChanges();
+                }
+            }
         }
 
         private static void UpdateBook() {
-            using(var db = new BooksDbContext()) {
-                var book = db.Books.Single(x=>x.Title =="銀河鉄道の夜");
+            using (var db = new BooksDbContext()) {
+                var book = db.Books.Single(x => x.Title == "銀河鉄道の夜");
                 book.PublishedYear = 2016;
                 db.SaveChanges();
             }
@@ -56,11 +83,13 @@ namespace SampleEntityFramework {
         }
 
         static void DisplayBooks() {
-            var books = GetBooks();
-            foreach(var book in books) {
-                Console.WriteLine($"{book.Title}{book.PublishedYear}");
+            using (var db = new BooksDbContext()) {
+                foreach (var book in db.Books.ToList()) {
+                    Console.WriteLine("{0}{1}{2}({3:yyyy/MM/dd})",
+                    book.Title, book.PublishedYear,
+                    book.Author.Name, book.Author.Birthday);
+                }
             }
-            Console.WriteLine();
         }
 
         static IEnumerable<Book> GetBooks() {
