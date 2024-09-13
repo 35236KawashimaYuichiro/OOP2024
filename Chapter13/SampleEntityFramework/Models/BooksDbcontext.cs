@@ -3,14 +3,14 @@ using System.Data.Entity;
 using System.Linq;
 
 namespace SampleEntityFramework.Models {
-    public class BooksDbcontext : DbContext {
+    public class BooksDbContext : DbContext {
         // コンテキストは、アプリケーションの構成ファイル (App.config または Web.config) から 'BooksDbcontext' 
         // 接続文字列を使用するように構成されています。既定では、この接続文字列は LocalDb インスタンス上
         // の 'SampleEntityFramework.Models.BooksDbcontext' データベースを対象としています。 
         // 
         // 別のデータベースとデータベース プロバイダーまたはそのいずれかを対象とする場合は、
         // アプリケーション構成ファイルで 'BooksDbcontext' 接続文字列を変更してください。
-        public BooksDbcontext()
+        public BooksDbContext()
             : base("name=BooksDbcontext") {
         }
 
