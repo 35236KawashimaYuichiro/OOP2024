@@ -14,10 +14,73 @@ namespace SampleEntityFramework {
             //UpdateBook();
             //AddAuthors2();
             //AddBooks2();
-            DisplayBooks();
+
             //DeleteAllBooksAndAuthors();
+            Console.WriteLine("# 1.2");
+            DisplayAllBooks2();
+
+            Console.WriteLine();
+            Console.WriteLine("# 1.3");
+            DisplayAllBooks3();
+
+            Console.WriteLine();
+            Console.WriteLine("# 1.4");
+            Exercise1_4();
+
+            Console.WriteLine();
+            Console.WriteLine("# 1.5");
+            Exercise1_5();
+
+            Console.ReadLine(); //コンソールアプリだが F5 でデバッグ実行したいために記述
 
         }
+        static void DisplayAllBooks3() {
+            using (var db = new BooksDbContext()) {
+                var maxTitle = db.Books.Max(b => b.Title.Length);
+
+                var maxBooks = db.Books
+                    .Where(b => b.Title.Length == maxTitle)
+                    .ToList();
+
+                foreach (var book in maxBooks) {
+                    Console.WriteLine("{0} {1} {2} ({3:yyyy/MM/dd})",
+                        book.Title, book.PublishedYear,
+                        book.Author.Name, book.Author.Birthday);
+                }
+            }
+        }
+        static void Exercise1_4() {
+            using (var db = new BooksDbContext()) {
+                var books = db.Books
+                              .OrderBy(b => b.PublishedYear)
+                              .Take(3)  // 3冊だけ取得
+                              .ToList();
+
+                foreach (var book in books) {
+                    Console.WriteLine("{0} {1} {2} ({3:yyyy/MM/dd})",
+                        book.Title, book.PublishedYear,
+                        book.Author.Name, book.Author.Birthday);
+                }
+            }
+
+        }
+        static void Exercise1_5() {
+            using (var db = new BooksDbContext()) {
+                var Authors = db.Authors
+                    .OrderByDescending(b => b.Birthday)
+                    .ToList();
+
+                foreach (var author in Authors) {
+                    Console.WriteLine("著者：" + author.Name);
+
+                    foreach (var book in author.Books) {
+                        Console.WriteLine(" {0} {1}年 ",
+                            book.Title, book.PublishedYear);
+                    }
+                }
+            }
+        }
+
         private static void DeleteAllBooksAndAuthors() {
             using (var db = new BooksDbContext()) {
                 // すべての書籍を削除
@@ -82,14 +145,18 @@ namespace SampleEntityFramework {
             }
         }
 
-        static void DisplayBooks() {
+        static void DisplayAllBooks2() {
             using (var db = new BooksDbContext()) {
                 foreach (var book in db.Books.ToList()) {
-                    Console.WriteLine("{0}{1}{2}({3:yyyy/MM/dd})",
+                    Console.WriteLine("{0} {1} {2} ({3:yyyy/MM/dd})",
                     book.Title, book.PublishedYear,
                     book.Author.Name, book.Author.Birthday);
                 }
             }
+        }
+
+        static void DisplayBooks3() {
+
         }
 
         static IEnumerable<Book> GetBooks() {
