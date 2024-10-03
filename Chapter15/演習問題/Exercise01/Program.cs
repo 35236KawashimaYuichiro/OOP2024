@@ -65,7 +65,7 @@ namespace Exercise01 {
             var categoryIds = Library.Books
                             .Where(b => b.PublishedYear == 2016)
                             .Select(b => b.CategoryId)
-                            .Distinct(); 
+                            .Distinct();
 
             var categories = Library.Categories
                             .Where(c => categoryIds.Contains(c.Id))
@@ -93,11 +93,35 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_7() {
-
+            var categoriesId = Library.Categories.Single(c => c.Name == "Development").Id;
+            var query = Library.Books.Where(b => b.CategoryId == categoriesId)
+                                        .GroupBy(b => b.PublishedYear)
+                                        .OrderBy(b => b.Key);
+            foreach (var group in query) {
+                Console.WriteLine("#{0}年", group.Key);
+                foreach (var item in group) {
+                    Console.WriteLine("  {0}", item.Title);
+                }
+            }
         }
 
-        private static void Exercise1_8() {
 
+        private static void Exercise1_8() {
+            var categoriBooks = Library.Categories
+            .GroupJoin(
+                Library.Books,
+                category => category.Id,
+                book => book.CategoryId,
+                (category, books) => new {
+                    CategoryName = category.Name,
+                    BookCount = books.Count()
+                })
+                .Where(category => category.BookCount >= 4);
+
+            Console.WriteLine("4冊以上発行されているカテゴリ:");
+            foreach (var category in categoriBooks) {
+                Console.WriteLine(category.CategoryName);
+            }
         }
     }
 }
