@@ -120,7 +120,7 @@ namespace Exercise01 {
 
             Console.WriteLine("4冊以上発行されているカテゴリ:");
             foreach (var category in categoriBooks) {
-                Console.WriteLine(category.CategoryName);
+                Console.WriteLine(category.CategoryName + "(" + category.BookCount + "冊)");
             }
         }
     }
