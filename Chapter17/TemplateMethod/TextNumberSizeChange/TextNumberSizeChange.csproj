@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{153C813C-AC63-48DA-9CE6-6D077D3B1EDE}</ProjectGuid>
+    <ProjectGuid>{B12B61CC-D1AF-4255-8E0B-5DD0661F765B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LineCounter</RootNamespace>
-    <AssemblyName>LineCounter</AssemblyName>
+    <RootNamespace>TextNumberSizeChange</RootNamespace>
+    <AssemblyName>TextNumberSizeChange</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,9 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LineCounterProcessor.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="ToHankakuProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -159,6 +159,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Strategy", "Strategy", "{80
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceConverter", "Chapter17\Strategy\DistanceConverter\DistanceConverter.csproj", "{CE0D28FA-11C8-4636-A651-E89DB1F64544}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextNumberSizeChange", "Chapter17\TemplateMethod\TextNumberSizeChange\TextNumberSizeChange.csproj", "{B12B61CC-D1AF-4255-8E0B-5DD0661F765B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -361,6 +363,10 @@ Global
 		{CE0D28FA-11C8-4636-A651-E89DB1F64544}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE0D28FA-11C8-4636-A651-E89DB1F64544}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE0D28FA-11C8-4636-A651-E89DB1F64544}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B12B61CC-D1AF-4255-8E0B-5DD0661F765B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B12B61CC-D1AF-4255-8E0B-5DD0661F765B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B12B61CC-D1AF-4255-8E0B-5DD0661F765B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B12B61CC-D1AF-4255-8E0B-5DD0661F765B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -428,6 +434,7 @@ Global
 		{153C813C-AC63-48DA-9CE6-6D077D3B1EDE} = {3700A332-F058-4F15-B5D5-E2698C974ADA}
 		{8021C99E-B2B1-4085-9A4B-FCBD1102C260} = {9B483AF5-C0B4-46D0-B17E-D7C7C24EE311}
 		{CE0D28FA-11C8-4636-A651-E89DB1F64544} = {8021C99E-B2B1-4085-9A4B-FCBD1102C260}
+		{B12B61CC-D1AF-4255-8E0B-5DD0661F765B} = {3700A332-F058-4F15-B5D5-E2698C974ADA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {747255DC-99FA-43C4-A260-476CBD864825}
