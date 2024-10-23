@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{79E65E6A-F5F3-4814-9DB0-491C055EB084}</ProjectGuid>
+    <ProjectGuid>{7ECBFC00-4ABF-4900-9904-45BA0242A8B7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CollarChecker</RootNamespace>
-    <AssemblyName>CollarChecker</AssemblyName>
+    <RootNamespace>CollorChecker</RootNamespace>
+    <AssemblyName>CollorChecker</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -69,6 +69,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyColor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CollarChecker.Properties {
+namespace CollorChecker.Properties {
 
 
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
