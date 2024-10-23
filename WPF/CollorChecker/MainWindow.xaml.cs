@@ -40,7 +40,12 @@ namespace CollorChecker {
                 Color = Color.FromRgb(r, g, b),
                 Name = $"R: {r}, G: {g}, B: {b}"
             };
-            stockList.Items.Add(myColor);
+            bool exists = stockList.Items.Cast<MyColor>().Any(c => c.Color == myColor.Color);
+            if (!exists) {
+                stockList.Items.Add(myColor);
+            } else {
+                MessageBox.Show("この色はすでにリストに存在します。", "重複エラー", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
