@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +24,15 @@ namespace CollorChecker {
 
         public MainWindow() {
             InitializeComponent();
+
+            currentColor.Color = Color.FromArgb(255, 0, 0, 0);
+            
+            DataContext = GetColorList();
+        }
+
+        private MyColor[] GetColorList() {
+            return typeof(Colors).GetProperties(BindingFlags.Public | BindingFlags.Static)
+                .Select(i => new MyColor() { Color = (Color)i.GetValue(null), Name = i.Name }).ToArray();
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
@@ -44,5 +55,17 @@ namespace CollorChecker {
             gSlider.Value = ((MyColor)stockList.Items[stockList.SelectedIndex]).Color.G;
             bSlider.Value = ((MyColor)stockList.Items[stockList.SelectedIndex]).Color.B;
         }
+
+        private void colorSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (colorSelectComboBox.SelectedItem != null) {
+                MyColor selectedColor = (MyColor)colorSelectComboBox.SelectedItem;
+
+                colorArea.Background = new SolidColorBrush(selectedColor.Color);
+
+                rSlider.Value = selectedColor.Color.R;
+                gSlider.Value = selectedColor.Color.G;
+                bSlider.Value = selectedColor.Color.B;
+            }
+        }
+        }
     }
-}

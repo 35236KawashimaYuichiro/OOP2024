@@ -40,7 +40,21 @@
             <Slider x:Name="bSlider" Maximum="255" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"  ValueChanged="Slider_ValueChanged"/>
             <TextBox x:Name="bValue" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Text="{Binding Value, ElementName=bSlider,StringFormat=F0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/>
 
-            <ComboBox x:Name="colorSelectComboBox" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
+            <ComboBox ItemsSource="{Binding}" SelectedValue="{Binding Color}" x:Name="colorSelectComboBox" Grid.ColumnSpan="3" Grid.Row="3" Margin="25,10" VerticalAlignment="Center" SelectionChanged="colorSelectComboBox_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="20" Height="Auto" Margin="5,0" BorderThickness="1" BorderBrush="Black"  >
+                            <Border.Background>
+                                <SolidColorBrush Color="{Binding Color}"/>
+                            </Border.Background>
+                        </Border>
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+            </ComboBox>
+
         </Grid>
         
         <Grid Grid.Column="2">
