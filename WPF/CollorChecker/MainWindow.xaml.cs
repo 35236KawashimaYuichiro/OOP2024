@@ -38,15 +38,21 @@ namespace CollorChecker {
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
             colorArea.Background = new SolidColorBrush(currentColor.Color);
+
+            //colorSelectComboBox.SelectedItem = null;
+            var matchedColor = ((MyColor[])DataContext).FirstOrDefault(c => c.Color == currentColor.Color);
+            currentColor.Name = matchedColor.Name ?? $"R: {currentColor.Color.R}, G: {currentColor.Color.G}, B: {currentColor.Color.B}";
         }
 
         private void stockButton_Click(object sender, RoutedEventArgs e) {
-            if (!stockList.Items.Contains((MyColor)currentColor)) {
-                stockList.Items.Insert(0, currentColor);
+            var colorName = currentColor.Name ?? $"{currentColor.Color}";
+            var colorExists = stockList.Items.OfType<MyColor>().Any(color => color.Color == currentColor.Color);
+
+            if (!colorExists) {
+                stockList.Items.Insert(0, new MyColor { Color = currentColor.Color, Name = colorName });
             } else {
-                MessageBox.Show("この色はすでに保存されています。");
+                MessageBox.Show("この色は追加済です。");
             }
-            currentColor.Name = null;
         }
 
 
@@ -68,3 +74,4 @@ namespace CollorChecker {
         }
     }
 }
+ 
