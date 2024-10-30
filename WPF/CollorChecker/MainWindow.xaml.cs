@@ -85,7 +85,7 @@ namespace CollorChecker {
                 gSlider.Value = 0;
                 bSlider.Value = 0;
             } else {
-                MessageBox.Show("色を選択してください。"); 
+                MessageBox.Show("削除する色を選択してください。"); 
             }
         }
     }
