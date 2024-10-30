@@ -30,40 +30,41 @@
 
             <TextBlock Grid.Row="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Text="R"/>
             <Slider x:Name="rSlider" Maximum="255" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"/>
-            <TextBox x:Name="rValue" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Text="{Binding Value, ElementName=rSlider,StringFormat=F0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/>
+            <TextBox x:Name="rValue" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Text="{Binding Value, ElementName=rSlider,StringFormat=F0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="5"/>
 
             <TextBlock Grid.Row="1" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Text="G"/>
             <Slider x:Name="gSlider" Maximum="255" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"  ValueChanged="Slider_ValueChanged"/>
-            <TextBox x:Name="gValue" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Text="{Binding Value, ElementName=gSlider,StringFormat=F0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/>
+            <TextBox x:Name="gValue" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Text="{Binding Value, ElementName=gSlider,StringFormat=F0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="5"/>
 
             <TextBlock Grid.Row="2" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Text="B"/>
             <Slider x:Name="bSlider" Maximum="255" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"  ValueChanged="Slider_ValueChanged"/>
-            <TextBox x:Name="bValue" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Text="{Binding Value, ElementName=bSlider,StringFormat=F0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20"/>
+            <TextBox x:Name="bValue" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Text="{Binding Value, ElementName=bSlider,StringFormat=F0, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="5"/>
 
             <ComboBox ItemsSource="{Binding}" SelectedValue="{Binding Color}" x:Name="colorSelectComboBox" Grid.ColumnSpan="3" Grid.Row="3" Margin="25,10" VerticalAlignment="Center" SelectionChanged="colorSelectComboBox_SelectionChanged">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Border Width="20" Height="Auto" Margin="5,0" BorderThickness="1" BorderBrush="Black"  >
-                            <Border.Background>
-                                <SolidColorBrush Color="{Binding Color}"/>
-                            </Border.Background>
-                        </Border>
-                        <TextBlock Text="{Binding Name}"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="20" Height="Auto" Margin="5,0" BorderThickness="1" BorderBrush="Black"  >
+                                <Border.Background>
+                                    <SolidColorBrush Color="{Binding Color}"/>
+                                </Border.Background>
+                            </Border>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
 
         </Grid>
-        
+
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="stockButton" Grid.Row="0" Content="STOCK" FontSize="16" Margin="10" Click="stockButton_Click"/>
+            <Button x:Name="stockButton" Grid.Row="0" Content="STOCK" FontSize="16" Margin="10,10,85,10" Click="stockButton_Click" BorderBrush="Black" Background="#FFA0BCEA"/>
+            <Button x:Name="deleteButton" Grid.Row="0" Content="DELETE" FontSize="16" Margin="160,10,10,10" Click="deleteButton_Click" AutomationProperties.IsOffscreenBehavior="Offscreen" Background="#FFF3C3C3"/>
             <ListBox x:Name="stockList" Grid.Row="1" Margin="10,0,10,10" SelectionChanged="stockList_SelectionChanged" FontFamily="BIZ UDGothic"/>
         </Grid>
 

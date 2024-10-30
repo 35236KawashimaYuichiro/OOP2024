@@ -57,8 +57,11 @@ namespace CollorChecker {
 
 
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            colorArea.Background = new SolidColorBrush(((MyColor)stockList.Items[stockList.SelectedIndex]).Color);
-            setSliderValue(((MyColor)stockList.Items[stockList.SelectedIndex]).Color);
+            if (stockList.SelectedIndex != -1) { // 有効なインデックスか確認
+                var selectedColor = (MyColor)stockList.SelectedItem;
+                colorArea.Background = new SolidColorBrush(selectedColor.Color);
+                setSliderValue(selectedColor.Color);
+            }
         }
 
         private void setSliderValue(Color color) {
@@ -71,6 +74,19 @@ namespace CollorChecker {
             currentColor = (MyColor)((ComboBox)sender).SelectedItem;
             setSliderValue(currentColor.Color);
             colorArea.Background = new SolidColorBrush(currentColor.Color);
+        }
+
+        private void deleteButton_Click(object sender, RoutedEventArgs e) {
+            if (stockList.SelectedItem != null) {
+                stockList.Items.Remove(stockList.SelectedItem);
+
+                colorArea.Background = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+                rSlider.Value = 0;
+                gSlider.Value = 0;
+                bSlider.Value = 0;
+            } else {
+                MessageBox.Show("色を選択してください。"); 
+            }
         }
     }
 }
