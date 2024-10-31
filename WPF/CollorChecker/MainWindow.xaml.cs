@@ -21,13 +21,13 @@ namespace CollorChecker {
     /// </summary>
     public partial class MainWindow : Window {
         MyColor currentColor;
-
+        MyColor[] colorsTable;
         public MainWindow() {
             InitializeComponent();
 
             currentColor.Color = Color.FromArgb(255, 0, 0, 0);
 
-            DataContext = GetColorList();
+            DataContext = colorsTable = GetColorList();
         }
 
         private MyColor[] GetColorList() {
@@ -42,6 +42,16 @@ namespace CollorChecker {
             //colorSelectComboBox.SelectedItem = null;
             var matchedColor = ((MyColor[])DataContext).FirstOrDefault(c => c.Color == currentColor.Color);
             currentColor.Name = matchedColor.Name ?? $"R: {currentColor.Color.R}, G: {currentColor.Color.G}, B: {currentColor.Color.B}";
+
+            int i;
+            for (i = 0; i < colorsTable.Length; i++) {
+                if (colorsTable[i].Color.Equals(currentColor.Color)) {
+                    currentColor.Name = colorsTable[i].Name;
+                    break;
+                }
+            }
+            colorSelectComboBox.SelectedIndex = i;
+
         }
 
         private void stockButton_Click(object sender, RoutedEventArgs e) {
