@@ -56,8 +56,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\DistanceUnit.cs" />
-    <Compile Include="Model\ImperialUnit.cs" />
-    <Compile Include="Model\MetricUnit.cs" />
+    <Compile Include="Model\PoundUnit.cs" />
+    <Compile Include="Model\GramUnit.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />

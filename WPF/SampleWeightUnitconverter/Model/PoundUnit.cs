@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SampleWeightUnitConverter {
     internal class ImperialWeightUnit : WeightUnit {
-        private static List<ImperialWeightUnit> units = new List<ImperialWeightUnit> {
+        private static readonly List<ImperialWeightUnit> units = new List<ImperialWeightUnit> {
             new ImperialWeightUnit { Name = "oz", Coefficient = 1 },       // オンス
             new ImperialWeightUnit { Name = "lb", Coefficient = 16 }       // ポンド (1ポンド = 16オンス)
         };

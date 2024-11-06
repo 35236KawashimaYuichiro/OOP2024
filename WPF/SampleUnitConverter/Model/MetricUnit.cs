@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SampleUnitConverter {
     //メートル単位を表すクラス
     internal class MetricUnit : DistanceUnit {
-        private static List<MetricUnit> units = new List<MetricUnit> {
+        private static readonly List<MetricUnit> units = new List<MetricUnit> {
             new MetricUnit{ Name = "mm",Coefficient = 1,},
             new MetricUnit{ Name = "cm",Coefficient = 10,},
             new MetricUnit{ Name = "m",Coefficient = 10 * 100,},

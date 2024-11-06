@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SampleWeightUnitConverter {
     internal class MetricWeightUnit : WeightUnit {
-        private static List<MetricWeightUnit> units = new List<MetricWeightUnit> {
+        private static readonly List<MetricWeightUnit> units = new List<MetricWeightUnit> {
             new MetricWeightUnit { Name = "g", Coefficient = 1 },          // グラム
             new MetricWeightUnit { Name = "kg", Coefficient = 1000 }       // キログラム
         };
