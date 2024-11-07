@@ -12,8 +12,8 @@ namespace SampleWeightUnitConverter {
         public ICommand ImperialUnitToMetric { get; private set; }
         public ICommand MetricToImperialUnit { get; private set; }
 
-        public MetricWeightUnit CurrentMetricUnit { get; set; }
-        public ImperialWeightUnit CurrentImperialUnit { get; set; }
+        public GramUnit CurrentMetricUnit { get; set; }
+        public PoundUnit CurrentImperialUnit { get; set; }
 
         public double MetricValue {
             get { return metricValue; }
@@ -32,8 +32,8 @@ namespace SampleWeightUnitConverter {
         }
 
         public MainWindowViewModel() {
-            this.CurrentMetricUnit = MetricWeightUnit.Units.First();
-            this.CurrentImperialUnit = ImperialWeightUnit.Units.First();
+            this.CurrentMetricUnit = GramUnit.Units.First();
+            this.CurrentImperialUnit = PoundUnit.Units.First();
 
             this.MetricToImperialUnit = new DelegateCommand(
                 () => this.ImperialValue = this.CurrentImperialUnit.FromMetricUnit(this.CurrentMetricUnit, this.MetricValue)
