@@ -55,7 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\DistanceUnit.cs" />
+    <Compile Include="Model\WeightUnit.cs" />
     <Compile Include="Model\PoundUnit.cs" />
     <Compile Include="Model\GramUnit.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
