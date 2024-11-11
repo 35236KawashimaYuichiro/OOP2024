@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace SampleWeightUnitConverter {
     internal class MainWindowViewModel : ViewModel {
-        private double metricValue, imperialValue;
+        private double gramValue, poundValue;
 
         public ICommand ImperialUnitToMetric { get; private set; }
         public ICommand MetricToImperialUnit { get; private set; }
@@ -16,17 +16,17 @@ namespace SampleWeightUnitConverter {
         public PoundUnit CurrentImperialUnit { get; set; }
 
         public double MetricValue {
-            get { return metricValue; }
+            get { return gramValue; }
             set {
-                metricValue = value;
+                gramValue = value;
                 OnPropertyChanged();
             }
         }
 
         public double ImperialValue {
-            get { return imperialValue; }
+            get { return poundValue; }
             set {
-                imperialValue = value;
+                poundValue = value;
                 OnPropertyChanged();
             }
         }
