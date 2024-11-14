@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="300">
+        Title="MainWindow" Height="350" Width="300">
     <Grid>
         <StackPanel Margin="10">
             <StackPanel Orientation="Horizontal">
@@ -18,14 +18,22 @@
                 <TextBox x:Name="PhoneTextBox" Width="200" Margin="3"/>
             </StackPanel>
 
+            <StackPanel Orientation="Horizontal">
+                <Label Content="住所:" VerticalAlignment="Center" Width="60"/>
+                <TextBox x:Name="AddressTextBox" Width="200" Margin="3"/>
+            </StackPanel>
+
             <Button Content="Save" x:Name="SaveButton" Click="SaveButton_Click" Margin="5"/>
             <Button Content="Read" x:Name="ReadButton" Click="ReadButton_Click" Margin="5"/>
+
             <ListView x:Name="CustomerListView" Margin="0,5,0,0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Name}" Margin="5,0" VerticalAlignment="Center" />
-                            <TextBlock Text="{Binding Phone}" Margin="5,0" VerticalAlignment="Center" />
+                        <StackPanel>
+                            <TextBlock Text="{Binding Id}" />
+                            <TextBlock Text="{Binding Name}" FontSize="20"/>
+                            <TextBlock Text="{Binding Phone}" Foreground="Aqua"/>
+                            <TextBlock Text="{Binding Address}" Foreground="Gray"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
