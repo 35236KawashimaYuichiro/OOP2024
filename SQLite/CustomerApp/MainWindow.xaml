@@ -31,8 +31,8 @@
                     <DataTemplate>
                         <StackPanel>
                             <TextBlock Text="{Binding Id}" />
-                            <TextBlock Text="{Binding Name}" FontSize="20"/>
-                            <TextBlock Text="{Binding Phone}" Foreground="Aqua"/>
+                            <TextBlock Text="{Binding Name}" FontSize="15"/>
+                            <TextBlock Text="{Binding Phone}" Foreground="Firebrick"/>
                             <TextBlock Text="{Binding Address}" Foreground="Gray"/>
                         </StackPanel>
                     </DataTemplate>
