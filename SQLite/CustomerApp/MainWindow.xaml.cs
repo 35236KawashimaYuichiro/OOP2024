@@ -23,7 +23,7 @@ namespace CustomerApp {
         List<Customer> _customers;
         public MainWindow() {
             InitializeComponent();
-
+            ReadDatabase();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
@@ -41,7 +41,22 @@ namespace CustomerApp {
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
+            var selectedCustomer = CustomerListView.SelectedItem as Customer;
 
+            if (selectedCustomer == null) {
+                MessageBox.Show("更新するデータを選んでください。");
+                return;
+            }
+            selectedCustomer.Name = NameTextBox.Text;
+            selectedCustomer.Phone = PhoneTextBox.Text;
+            selectedCustomer.Address = AddressTextBox.Text;
+
+            using (var connection = new SQLiteConnection(App.databasePass)) {
+                connection.CreateTable<Customer>();
+                connection.Update(selectedCustomer);
+            }
+
+            ReadDatabase();
         }
 
         private void ReadDatabase() {
@@ -61,7 +76,7 @@ namespace CustomerApp {
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
             var item = CustomerListView.SelectedItem as Customer;
             if (item == null) {
-                MessageBox.Show("削除する行を選んで下さい");
+                MessageBox.Show("削除するデータを選んで下さい");
                 return;
             }
 
