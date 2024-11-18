@@ -14,5 +14,9 @@ namespace CustomerApp {
         static string databaseName = "Shop.db";
         static string folderPass = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         public static string databasePass = System.IO.Path.Combine(folderPass, databaseName);
+
+        private void Application_Startup(object sender, StartupEventArgs e) {
+
+        }
     }
 }

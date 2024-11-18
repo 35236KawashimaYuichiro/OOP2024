@@ -24,9 +24,12 @@
             </StackPanel>
 
             <Button Content="Save" x:Name="SaveButton" Click="SaveButton_Click" Margin="5"/>
-            <Button Content="Read" x:Name="ReadButton" Click="ReadButton_Click" Margin="5"/>
-
-            <ListView x:Name="CustomerListView" Margin="0,5,0,0">
+            <Button Content="Delete" x:Name="DeleteButton" Click="DeleteButton_Click" Margin="5"/>
+            <Button Content="Update" x:Name="ReadButton" Click="UpdateButton_Click" Margin="5"/>
+            
+            <TextBox x:Name="SearchTextBox" FontSize="15" TextChanged="SearchTextBox_TextChanged"/>
+            
+            <ListView x:Name="CustomerListView" Margin="0,5,0,0" SelectionChanged="CustomerListView_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
