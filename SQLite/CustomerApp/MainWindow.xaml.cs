@@ -26,17 +26,27 @@ namespace CustomerApp {
             ReadDatabase();
         }
 
+        private byte[] _selectedImageData;
+
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
             var customer = new Customer() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
+                ImageData = _selectedImageData // 画像データを保存
             };
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 connection.Insert(customer);
             }
+
+            NameTextBox.Clear();
+            PhoneTextBox.Clear();
+            AddressTextBox.Clear();
+            CustomerImage.Source = null;
+            _selectedImageData = null;
+
             ReadDatabase();
         }
 
@@ -96,6 +106,38 @@ namespace CustomerApp {
                 NameTextBox.Text = selectedCustomer.Name;
                 PhoneTextBox.Text = selectedCustomer.Phone;
                 AddressTextBox.Text = selectedCustomer.Address;
+
+                if (selectedCustomer.ImageData != null) {
+                    BitmapImage bitmap = new BitmapImage();
+                    using (var stream = new System.IO.MemoryStream(selectedCustomer.ImageData)) {
+                        bitmap.BeginInit();
+                        bitmap.StreamSource = stream;
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.EndInit();
+                    }
+                    CustomerImage.Source = bitmap;
+                } else {
+                    CustomerImage.Source = null; 
+                }
+            }
+        }
+
+        private void ImageButton_Click(object sender, RoutedEventArgs e) {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif",
+                Title = "画像を選択してください"
+            };
+
+            if (openFileDialog.ShowDialog() == true) {
+                string selectedFileName = openFileDialog.FileName;
+
+                try {
+                    BitmapImage bitmap = new BitmapImage(new Uri(selectedFileName, UriKind.Absolute));
+                    CustomerImage.Source = bitmap;
+                }
+                catch (Exception ex) {
+                    MessageBox.Show($"画像の読み込みに失敗しました: {ex.Message}", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }
