@@ -157,5 +157,28 @@ namespace CustomerApp {
                 }
             }
         }
+
+        private void RemoveImageButton_Click(object sender, RoutedEventArgs e) {
+            var selectedCustomer = CustomerListView.SelectedItem as Customer;
+
+            if (selectedCustomer == null) {
+                MessageBox.Show("画像を削除する顧客を選んでください。");
+                return;
+            }
+
+            selectedCustomer.ImageData = null;
+
+            using (var connection = new SQLiteConnection(App.databasePass)) {
+                connection.CreateTable<Customer>();
+                connection.Update(selectedCustomer);
+            }
+
+            CustomerImage.Source = null;
+            _selectedImageData = null;
+            MessageBox.Show("画像を削除しました。");
+
+            ReadDatabase();
+
+        }
     }
 }
