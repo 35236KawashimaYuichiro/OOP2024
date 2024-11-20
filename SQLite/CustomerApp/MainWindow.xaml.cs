@@ -29,11 +29,18 @@ namespace CustomerApp {
         private byte[] _selectedImageData;
 
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
+            if (string.IsNullOrWhiteSpace(NameTextBox.Text) ||
+                string.IsNullOrWhiteSpace(PhoneTextBox.Text) ||
+                string.IsNullOrWhiteSpace(AddressTextBox.Text)) {
+                MessageBox.Show("全てのフィールドを入力してください。");
+                return;
+            }
+
             var customer = new Customer() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
-                ImageData = _selectedImageData // 画像データを保存
+                ImageData = _selectedImageData
             };
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
@@ -60,6 +67,7 @@ namespace CustomerApp {
             selectedCustomer.Name = NameTextBox.Text;
             selectedCustomer.Phone = PhoneTextBox.Text;
             selectedCustomer.Address = AddressTextBox.Text;
+            selectedCustomer.ImageData = _selectedImageData;
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
@@ -107,7 +115,8 @@ namespace CustomerApp {
                 PhoneTextBox.Text = selectedCustomer.Phone;
                 AddressTextBox.Text = selectedCustomer.Address;
 
-                if (selectedCustomer.ImageData != null) {
+                if (selectedCustomer.ImageData != null && selectedCustomer.ImageData.Length > 0) {
+
                     BitmapImage bitmap = new BitmapImage();
                     using (var stream = new System.IO.MemoryStream(selectedCustomer.ImageData)) {
                         bitmap.BeginInit();
@@ -116,9 +125,15 @@ namespace CustomerApp {
                         bitmap.EndInit();
                     }
                     CustomerImage.Source = bitmap;
+
                 } else {
-                    CustomerImage.Source = null; 
+                    CustomerImage.Source = null;
                 }
+            } else {
+                NameTextBox.Clear();
+                PhoneTextBox.Clear();
+                AddressTextBox.Clear();
+                CustomerImage.Source = null;
             }
         }
 
@@ -131,12 +146,14 @@ namespace CustomerApp {
             if (openFileDialog.ShowDialog() == true) {
                 string selectedFileName = openFileDialog.FileName;
 
-                try {
-                    BitmapImage bitmap = new BitmapImage(new Uri(selectedFileName, UriKind.Absolute));
-                    CustomerImage.Source = bitmap;
-                }
-                catch (Exception ex) {
-                    MessageBox.Show($"画像の読み込みに失敗しました: {ex.Message}", "エラー", MessageBoxButton.OK, MessageBoxImage.Error);
+                BitmapImage bitmap = new BitmapImage(new Uri(selectedFileName, UriKind.Absolute));
+                CustomerImage.Source = bitmap;
+
+                using (var stream = new System.IO.MemoryStream()) {
+                    BitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                    encoder.Save(stream);
+                    _selectedImageData = stream.ToArray();
                 }
             }
         }
