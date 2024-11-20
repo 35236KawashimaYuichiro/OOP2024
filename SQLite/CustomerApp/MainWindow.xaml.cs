@@ -26,12 +26,12 @@ namespace CustomerApp {
             ReadDatabase();
         }
 
-        private byte[] _selectedImageData;
+        private string _selectedImagePath;
 
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
             if (string.IsNullOrWhiteSpace(NameTextBox.Text) ||
-                string.IsNullOrWhiteSpace(PhoneTextBox.Text) ||
-                string.IsNullOrWhiteSpace(AddressTextBox.Text)) {
+        string.IsNullOrWhiteSpace(PhoneTextBox.Text) ||
+        string.IsNullOrWhiteSpace(AddressTextBox.Text)) {
                 MessageBox.Show("全てのフィールドを入力してください。");
                 return;
             }
@@ -40,7 +40,7 @@ namespace CustomerApp {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
-                ImageData = _selectedImageData
+                ImagePath = _selectedImagePath // パスを保存
             };
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
@@ -52,7 +52,7 @@ namespace CustomerApp {
             PhoneTextBox.Clear();
             AddressTextBox.Clear();
             CustomerImage.Source = null;
-            _selectedImageData = null;
+            _selectedImagePath = null;
 
             ReadDatabase();
         }
@@ -67,7 +67,7 @@ namespace CustomerApp {
             selectedCustomer.Name = NameTextBox.Text;
             selectedCustomer.Phone = PhoneTextBox.Text;
             selectedCustomer.Address = AddressTextBox.Text;
-            selectedCustomer.ImageData = _selectedImageData;
+            selectedCustomer.ImagePath = _selectedImagePath;
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
@@ -115,20 +115,12 @@ namespace CustomerApp {
                 PhoneTextBox.Text = selectedCustomer.Phone;
                 AddressTextBox.Text = selectedCustomer.Address;
 
-                if (selectedCustomer.ImageData != null && selectedCustomer.ImageData.Length > 0) {
-
-                    BitmapImage bitmap = new BitmapImage();
-                    using (var stream = new System.IO.MemoryStream(selectedCustomer.ImageData)) {
-                        bitmap.BeginInit();
-                        bitmap.StreamSource = stream;
-                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                        bitmap.EndInit();
-                    }
-                    CustomerImage.Source = bitmap;
-
+                if (!string.IsNullOrEmpty(selectedCustomer.ImagePath)) {
+                    CustomerImage.Source = new BitmapImage(new Uri(selectedCustomer.ImagePath, UriKind.Absolute));
                 } else {
                     CustomerImage.Source = null;
                 }
+
             } else {
                 NameTextBox.Clear();
                 PhoneTextBox.Clear();
@@ -146,15 +138,10 @@ namespace CustomerApp {
             if (openFileDialog.ShowDialog() == true) {
                 string selectedFileName = openFileDialog.FileName;
 
-                BitmapImage bitmap = new BitmapImage(new Uri(selectedFileName, UriKind.Absolute));
-                CustomerImage.Source = bitmap;
-
-                using (var stream = new System.IO.MemoryStream()) {
-                    BitmapEncoder encoder = new PngBitmapEncoder();
-                    encoder.Frames.Add(BitmapFrame.Create(bitmap));
-                    encoder.Save(stream);
-                    _selectedImageData = stream.ToArray();
-                }
+                // ファイルパスを保存
+                _selectedImagePath = null; // バイトデータは不要
+                CustomerImage.Source = new BitmapImage(new Uri(selectedFileName, UriKind.Absolute));
+                _selectedImagePath = selectedFileName; // パスを保存
             }
         }
 
@@ -166,7 +153,7 @@ namespace CustomerApp {
                 return;
             }
 
-            selectedCustomer.ImageData = null;
+            selectedCustomer.ImagePath = null;
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
@@ -174,7 +161,7 @@ namespace CustomerApp {
             }
 
             CustomerImage.Source = null;
-            _selectedImageData = null;
+            _selectedImagePath = null;
             MessageBox.Show("画像を削除しました。");
 
             ReadDatabase();
