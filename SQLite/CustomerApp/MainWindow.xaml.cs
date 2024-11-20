@@ -72,6 +72,7 @@ namespace CustomerApp {
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 connection.Update(selectedCustomer);
+                MessageBox.Show("データを更新しました。");
             }
 
             ReadDatabase();
@@ -104,8 +105,6 @@ namespace CustomerApp {
 
                 ReadDatabase();
             }
-
-
         }
 
         private void CustomerListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -138,8 +137,7 @@ namespace CustomerApp {
             if (openFileDialog.ShowDialog() == true) {
                 string selectedFileName = openFileDialog.FileName;
 
-                // ファイルパスを保存
-                _selectedImagePath = null; // バイトデータは不要
+                _selectedImagePath = null; 
                 CustomerImage.Source = new BitmapImage(new Uri(selectedFileName, UriKind.Absolute));
                 _selectedImagePath = selectedFileName; // パスを保存
             }
