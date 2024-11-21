@@ -29,10 +29,8 @@ namespace CustomerApp {
         private string _selectedImagePath;
 
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
-            if (string.IsNullOrWhiteSpace(NameTextBox.Text) ||
-        string.IsNullOrWhiteSpace(PhoneTextBox.Text) ||
-        string.IsNullOrWhiteSpace(AddressTextBox.Text)) {
-                MessageBox.Show("全てのフィールドを入力してください。");
+            if (string.IsNullOrWhiteSpace(NameTextBox.Text)){
+                MessageBox.Show("名前を入力してください。");
                 return;
             }
 
@@ -150,19 +148,10 @@ namespace CustomerApp {
                 MessageBox.Show("画像を削除する顧客を選んでください。");
                 return;
             }
-
             selectedCustomer.ImagePath = null;
-
-            using (var connection = new SQLiteConnection(App.databasePass)) {
-                connection.CreateTable<Customer>();
-                connection.Update(selectedCustomer);
-            }
-
             CustomerImage.Source = null;
             _selectedImagePath = null;
             MessageBox.Show("画像を削除しました。");
-
-            ReadDatabase();
 
         }
     }
