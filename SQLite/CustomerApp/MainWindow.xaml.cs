@@ -154,5 +154,17 @@ namespace CustomerApp {
             MessageBox.Show("画像を削除しました。");
 
         }
+
+        private void ResetButton_Click(object sender, RoutedEventArgs e) {
+            NameTextBox.Clear();
+            PhoneTextBox.Clear();
+            AddressTextBox.Clear();
+            CustomerImage.Source = null;
+            _selectedImagePath = null;
+            CustomerListView.SelectedItem = null;
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+            ReadDatabase(); 
+        }
     }
 }
