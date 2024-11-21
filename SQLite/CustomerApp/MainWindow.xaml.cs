@@ -21,6 +21,7 @@ namespace CustomerApp {
     /// </summary>
     public partial class MainWindow : Window {
         List<Customer> _customers;
+
         public MainWindow() {
             InitializeComponent();
             ReadDatabase();
@@ -29,7 +30,7 @@ namespace CustomerApp {
         private string _selectedImagePath;
 
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
-            if (string.IsNullOrWhiteSpace(NameTextBox.Text)){
+            if (string.IsNullOrWhiteSpace(NameTextBox.Text)) {
                 MessageBox.Show("名前を入力してください。");
                 return;
             }
@@ -37,9 +38,12 @@ namespace CustomerApp {
             var customer = new Customer() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
-                Address = AddressTextBox.Text,
-                ImagePath = _selectedImagePath // パスを保存
+                Address = AddressTextBox.Text
             };
+
+            if (_selectedImagePath != null) {
+                customer.SetImageFromFile(_selectedImagePath);
+            }
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
@@ -62,10 +66,14 @@ namespace CustomerApp {
                 MessageBox.Show("更新するデータを選んでください。");
                 return;
             }
+
             selectedCustomer.Name = NameTextBox.Text;
             selectedCustomer.Phone = PhoneTextBox.Text;
             selectedCustomer.Address = AddressTextBox.Text;
-            selectedCustomer.ImagePath = _selectedImagePath;
+
+            if (_selectedImagePath != null) {
+                selectedCustomer.SetImageFromFile(_selectedImagePath);
+            }
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
@@ -80,7 +88,6 @@ namespace CustomerApp {
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 _customers = connection.Table<Customer>().ToList();
-
                 CustomerListView.ItemsSource = _customers;
             }
         }
@@ -100,7 +107,6 @@ namespace CustomerApp {
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 connection.Delete(item);
-
                 ReadDatabase();
             }
         }
@@ -112,12 +118,11 @@ namespace CustomerApp {
                 PhoneTextBox.Text = selectedCustomer.Phone;
                 AddressTextBox.Text = selectedCustomer.Address;
 
-                if (!string.IsNullOrEmpty(selectedCustomer.ImagePath)) {
-                    CustomerImage.Source = new BitmapImage(new Uri(selectedCustomer.ImagePath, UriKind.Absolute));
+                if (selectedCustomer.ImageSource != null) {
+                    CustomerImage.Source = selectedCustomer.ImageSource;
                 } else {
                     CustomerImage.Source = null;
                 }
-
             } else {
                 NameTextBox.Clear();
                 PhoneTextBox.Clear();
@@ -134,10 +139,8 @@ namespace CustomerApp {
 
             if (openFileDialog.ShowDialog() == true) {
                 string selectedFileName = openFileDialog.FileName;
-
-                _selectedImagePath = null; 
+                _selectedImagePath = selectedFileName;
                 CustomerImage.Source = new BitmapImage(new Uri(selectedFileName, UriKind.Absolute));
-                _selectedImagePath = selectedFileName; // パスを保存
             }
         }
 
@@ -148,11 +151,10 @@ namespace CustomerApp {
                 MessageBox.Show("画像を削除する顧客を選んでください。");
                 return;
             }
-            selectedCustomer.ImagePath = null;
+            selectedCustomer.ClearImage();
             CustomerImage.Source = null;
             _selectedImagePath = null;
             MessageBox.Show("画像を削除しました。");
-
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e) {
@@ -163,8 +165,9 @@ namespace CustomerApp {
             _selectedImagePath = null;
             CustomerListView.SelectedItem = null;
         }
+
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            ReadDatabase(); 
+            ReadDatabase();
         }
     }
 }
